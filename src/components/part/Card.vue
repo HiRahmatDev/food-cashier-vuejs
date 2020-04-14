@@ -1,10 +1,10 @@
 <template>
   <div class="card">
     <div class="img-wrap">
-      <img src="@/assets/img/espresso.jpg" alt="">
+      <img :src="card.img_url" alt="">
     </div>
     <div class="text-wrap">
-      <p class="title-menu">{{ card.title }}</p>
+      <p class="title-menu">{{ card.food_title }}</p>
       <p class="price">{{ setRp }}</p>
     </div>
   </div>
@@ -15,7 +15,7 @@ export default {
   props: ['card'],
   computed: {
     setRp () {
-      return 'Rp. ' + this.card.price
+      return 'Rp. ' + this.card.food_price
     }
   }
 }
@@ -35,7 +35,6 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform ease .2s;
     }
   }
   .text-wrap {
@@ -48,12 +47,11 @@ export default {
       margin: 4px 0 8px;
     }
   }
+  transition: .2s;
   &:hover {
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.171);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px -10px rgba(0, 0, 0, 0.37);
     cursor: pointer;
-  }
-  &:hover img {
-    transform: scale(1.06);
   }
 }
 </style>

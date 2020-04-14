@@ -1,18 +1,18 @@
 <template>
-  <aside>
+  <aside class="sidebar">
     <div>
-      <button class="burger">
+      <a class="burger">
         <img src="@/assets/img/menu.png">
-      </button>
-      <button class="fork">
+      </a>
+      <router-link to="/" class="fork">
         <img src="@/assets/img/fork.png">
-      </button>
-      <button class="clipboard">
+      </router-link>
+      <router-link to="/history" class="clipboard">
         <img src="@/assets/img/clipboard.png">
-      </button>
-      <button class="add">
+      </router-link>
+      <router-link to="/add" class="add">
         <img src="@/assets/img/add.png">
-      </button>
+      </router-link>
     </div>
   </aside>
 </template>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-aside {
+.sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -36,7 +36,7 @@ aside {
     display: flex;
     flex-direction: column;
   }
-  button {
+  a {
     background-color: transparent;
     border: none;
     cursor: pointer;
