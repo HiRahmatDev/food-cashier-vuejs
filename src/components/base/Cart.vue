@@ -11,21 +11,13 @@
     </div>
     <div class="wrap-body">
       <div class="cart-body">
-        <div class="cart-detail">
-          <div class="cart-img">
-            <img src="@/assets/img/espresso.jpg">
+        <CardOnCart :class="cart" />
+        <div v-if="cart === 'empty'" class="empty-cart">
+          <div class="empty-img">
+            <img src="@/assets/img/empty-cart.png">
           </div>
-          <div class="cart-info">
-            <h2>Coffee Latte</h2>
-            <div class="cart-count">
-              <div class="group-counter">
-                <button>-</button>
-                <input type="number">
-                <button>+</button>
-              </div>
-              <span>Rp. 15.000</span>
-            </div>
-          </div>
+          <h1>Your cart is empty</h1>
+          <p>Please add some items from the menu</p>
         </div>
       </div>
       <div class="cart-footer">
@@ -46,8 +38,17 @@
 </template>
 
 <script>
-export default {
+import CardOnCart from '@/components/part/CardOnCart.vue'
 
+export default {
+  data () {
+    return {
+      cart: ''
+    }
+  },
+  components: {
+    CardOnCart
+  }
 }
 </script>
 
@@ -61,22 +62,21 @@ export default {
   width: 0vw;
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   box-shadow: 4px 0 7px rgba(0, 0, 0, 0.733);
   overflow: hidden;
   transition: .3s;
   &.active {
-    width: 24vw;
-    top: 0;
+    width: 25vw;
   }
 }
 .cart-header, .wrap-body {
   width: 100%;
 }
 .cart-header {
-  padding: 15px 0;
+  padding: 12.5px 0;
+  box-shadow: 0 -4px 7px rgba(0, 0, 0, 0.733);
   div {
     display: flex;
     justify-content: center;
@@ -112,67 +112,42 @@ export default {
 .wrap-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 90%;
+  height: 100%;
   .cart-body {
-    width: 100%;
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.068);
+    .empty {
+      display: none;
     }
-    .cart-detail {
-      display: flex;
-      // justify-content: space-between;
-      padding: 20px;
-      .cart-img {
-        height: 70px;
-        border-radius: 10px;
+    .empty-cart {
+      .empty-img {
+        margin: 0 auto;
+        width: 160px;
+        height: 135px;
         overflow: hidden;
         img {
           width: 100%;
-          height: 100%;
           object-fit: cover;
+          background-position: center;
         }
       }
-      .cart-info {
-        padding: 6px 2px 0 12px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: space-between;
-        h2 {
-          font-weight: bold;
-          text-align: left;
-          width: 100%;
-        }
-        .cart-count {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          .group-counter {
-            display: flex;
-            input {
-              width: 30px;
-              &::-webkit-outer-spin-button,
-              &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-              }
-              &[type=number] {
-                -moz-appearance: textfield;
-              }
-            }
-          }
-        }
+      h1 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      p {
+        font-size: 15px;
+        font-weight: 400;
+        color: #cecece;
       }
     }
   }
-
   .cart-footer {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     padding: 10px;
+    margin-top: auto;
     .cart-total {
       padding: 0 5px;
-      width: 100%;
       text-align: left;
       .total-result {
         display: flex;
@@ -186,7 +161,6 @@ export default {
       }
     }
     .cart-btn-group {
-      width: 100%;
       button {
         width: 100%;
         margin: 5px 0;

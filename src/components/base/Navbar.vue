@@ -35,8 +35,9 @@ nav {
   font-weight: bold;
   padding: 6px 0;
   z-index: 1;
+  transition: .3s;
   &.cart-on {
-    width: 82vw;
+    width: 75vw;
   }
   div {
     display: flex;
@@ -55,17 +56,24 @@ nav {
       }
     }
     .search {
+      margin-right: 20px;
       img {
         height: 20px;
       }
     }
+    .trolly.hidden {
+      display: none;
+    }
     .trolly {
       display: flex;
       align-items: center;
+      margin-left: 0;
+      padding-left: 0;
       img {
         height: 25px;
       }
       .badge-cart {
+        font-family: 'Airbnb Cereal App', Avenir, Helvetica, Arial, sans-serif;
         display: flex;
         justify-content: center;
         width: 18px;

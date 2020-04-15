@@ -6,17 +6,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    foodMenu: null
+    foodMenu: []
   },
   mutations: {
-    loadApi (state, data) {
+    getMenu (state, data) {
       state.foodMenu = data
     }
   },
   actions: {
-    async loadApi (context, option) {
+    async getApi (context, option) {
       const res = await Axios.get(process.env.VUE_APP_URL_API + option)
-      context.commit('loadApi', res.data)
+      context.commit('getMenu', res.data)
+    },
+    async postApi (context, option) {
+      const res = await Axios.post(process.env.VUE_APP_URL_API + option)
+      context.commit('functionName', res.data)
     }
   },
   modules: {

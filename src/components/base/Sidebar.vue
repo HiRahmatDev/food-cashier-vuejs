@@ -37,11 +37,15 @@ export default {
     flex-direction: column;
   }
   a {
-    background-color: transparent;
+    display: flex;
+    border-radius: 100px;
     border: none;
     cursor: pointer;
     margin: 10px 0;
     padding: 10px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.048);
+    }
     img {
       width: 25px;
     }

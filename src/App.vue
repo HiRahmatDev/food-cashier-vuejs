@@ -1,8 +1,10 @@
 <template>
   <div id="food-cashier">
-    <Navbar @cart-clicked="showCart" />
+    <Navbar @modal-clicked="showModal"
+            @cart-clicked="showCart" />
     <Sidebar />
     <Cart @cart-clicked="hideCart" />
+    <Modal />
     <router-view/>
   </div>
 </template>
@@ -11,23 +13,30 @@
 import Navbar from '@/components/base/Navbar.vue'
 import Sidebar from '@/components/base/Sidebar.vue'
 import Cart from '@/components/base/Cart.vue'
+import Modal from '@/components/base/Modal.vue'
 
 export default {
   components: {
     Navbar,
     Sidebar,
-    Cart
+    Cart,
+    Modal
   },
   methods: {
     showCart () {
       document.getElementById('food-cashier').classList.add('cart-on')
+      document.querySelector('.trolly').classList.add('hidden')
       document.querySelector('nav').classList.add('cart-on')
       document.querySelector('.cart').classList.add('active')
     },
     hideCart () {
       document.getElementById('food-cashier').classList.remove('cart-on')
+      document.querySelector('.trolly').classList.remove('hidden')
       document.querySelector('nav').classList.remove('cart-on')
       document.querySelector('.cart').classList.remove('active')
+    },
+    showModal () {
+      alert('cek')
     }
   }
 }
@@ -44,6 +53,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000;
+  transition: .3s;
   &.cart-on {
     margin-right: 23vw;
   }
@@ -64,5 +74,8 @@ body {
   color: white;
   font-size: 20px;
   font-weight: 500;
+}
+.d-none {
+  display: none;
 }
 </style>

@@ -20,12 +20,9 @@ export default {
     }
   },
   methods: {
-    loadApi () {
-      this.$store.dispatch('loadApi', 'menu')
-    }
   },
-  created () {
-    this.loadApi()
+  mounted () {
+    this.$store.dispatch('getApi', 'menu')
   }
 }
 </script>
