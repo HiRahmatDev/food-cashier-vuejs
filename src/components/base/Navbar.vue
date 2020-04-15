@@ -9,8 +9,9 @@
         <button class="search">
           <img src="@/assets/img/magnifying-glass.png">
         </button>
-        <button class="cart">
+        <button @click="$emit('cart-clicked')" class="trolly">
           <img src="@/assets/img/shopping-cart.png">
+          <div class="badge-cart">0</div>
         </button>
       </div>
     </div>
@@ -34,6 +35,9 @@ nav {
   font-weight: bold;
   padding: 6px 0;
   z-index: 1;
+  &.cart-on {
+    width: 82vw;
+  }
   div {
     display: flex;
     justify-content: space-between;
@@ -55,9 +59,25 @@ nav {
         height: 20px;
       }
     }
-    .cart {
+    .trolly {
+      display: flex;
+      align-items: center;
       img {
         height: 25px;
+      }
+      .badge-cart {
+        display: flex;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 15px;
+        background-color: #57CAD5;
+        color: white;
+        margin-left: 6px;
+        font-weight: 500;
+        font-size: 15px;
+        text-align: center;
+        line-height: 18px;
       }
     }
   }
