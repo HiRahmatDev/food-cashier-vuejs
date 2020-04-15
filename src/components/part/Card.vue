@@ -49,7 +49,7 @@ export default {
   }
   transition: .2s;
   &:hover {
-    transform: translateY(-2px);
+    transform: scale(1.03);
     box-shadow: 0 5px 20px -10px rgba(0, 0, 0, 0.37);
     cursor: pointer;
   }

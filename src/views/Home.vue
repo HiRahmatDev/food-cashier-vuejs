@@ -29,9 +29,11 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  margin: 53px 0 0 60px;
+  margin: 8vh 0 0 60px;
   padding: 15px;
   box-sizing: border-box;
+  height: 90vh;
+  overflow-y: scroll;
   .wrap-menu {
     display: flex;
     flex-wrap: wrap;

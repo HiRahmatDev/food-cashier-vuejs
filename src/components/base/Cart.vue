@@ -12,6 +12,9 @@
     <div class="wrap-body">
       <div class="cart-body">
         <CardOnCart :class="cart" />
+        <CardOnCart :class="cart" />
+        <CardOnCart :class="cart" />
+        <CardOnCart :class="cart" />
         <div v-if="cart === 'empty'" class="empty-cart">
           <div class="empty-img">
             <img src="@/assets/img/empty-cart.png">
@@ -114,6 +117,8 @@ export default {
   flex-direction: column;
   height: 100%;
   .cart-body {
+    overflow-y: scroll;
+    height: 60vh;
     .empty {
       display: none;
     }
