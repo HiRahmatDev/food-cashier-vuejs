@@ -18,11 +18,12 @@
           <div class="cart-info">
             <h2>Coffee Latte</h2>
             <div class="cart-count">
-              <div class="grup-counter">
+              <div class="group-counter">
                 <button>-</button>
                 <input type="number">
                 <button>+</button>
               </div>
+              <span>Rp. 15.000</span>
             </div>
           </div>
         </div>
@@ -110,17 +111,19 @@ export default {
 }
 .wrap-body {
   display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   height: 90%;
   .cart-body {
     width: 100%;
-    background-color: palegreen;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.068);
+    }
     .cart-detail {
       display: flex;
+      // justify-content: space-between;
       padding: 20px;
       .cart-img {
-        width: 70px;
         height: 70px;
         border-radius: 10px;
         overflow: hidden;
@@ -130,8 +133,39 @@ export default {
           object-fit: cover;
         }
       }
+      .cart-info {
+        padding: 6px 2px 0 12px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+        h2 {
+          font-weight: bold;
+          text-align: left;
+          width: 100%;
+        }
+        .cart-count {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          .group-counter {
+            display: flex;
+            input {
+              width: 30px;
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+              &[type=number] {
+                -moz-appearance: textfield;
+              }
+            }
+          }
+        }
+      }
     }
   }
+
   .cart-footer {
     display: flex;
     flex-wrap: wrap;
