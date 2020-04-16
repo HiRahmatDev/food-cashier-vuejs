@@ -44,6 +44,7 @@ export default {
 
 <style lang="scss">
 @import '@/assets/scss/_reset.scss';
+@import '@/assets/scss/_font.scss';
 body {
   background-color: rgb(247, 247, 247);
 }
