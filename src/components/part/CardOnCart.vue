@@ -1,17 +1,17 @@
 <template>
   <div class="cart-detail">
     <div class="cart-img">
-      <img src="@/assets/img/espresso.jpg">
+      <img :src="item.img_url">
     </div>
     <div class="cart-info">
-      <h2>Coffee Latte</h2>
+      <h2>{{ item.food_title }}</h2>
       <div class="cart-count">
         <div class="group-counter">
-          <button @click="decrement()" >-</button>
+          <button @click="decrement" >-</button>
           <input v-model="counter" type="number">
-          <button @click="increment()" >+</button>
+          <button @click="increment" >+</button>
         </div>
-        <span>Rp. 15.000</span>
+        <span>{{ $store.getters.setRp(timesPrice) }}</span>
       </div>
     </div>
   </div>
@@ -19,18 +19,37 @@
 
 <script>
 export default {
+  props: ['item'],
   data () {
     return {
-      counter: 0
+      counter: this.item.counter
+    }
+  },
+  computed: {
+    timesPrice () {
+      return this.counter * this.item.food_price
     }
   },
   methods: {
     increment () {
       this.counter++
+      const data = {
+        id: this.item.id,
+        counter: this.counter
+      }
+      this.$store.commit('INCREMENT', data)
     },
     decrement () {
-      if (this.counter === 0) return
+      if (this.counter === 1) {
+        this.$store.commit('DELETE_MENU', this.item.id)
+        return
+      }
       this.counter--
+      const data = {
+        id: this.item.id,
+        counter: this.counter
+      }
+      this.$store.commit('DECREMENT', data)
     }
   }
 }

@@ -6,16 +6,14 @@
           <img src="@/assets/img/shopping-cart.png">
         </button>
         <h1>Cart</h1>
-        <div class="badge-cart">0</div>
+        <div class="badge-cart">{{ cartSum }}</div>
       </div>
     </div>
     <div class="wrap-body">
       <div class="cart-body">
-        <CardOnCart :class="cart" />
-        <CardOnCart :class="cart" />
-        <CardOnCart :class="cart" />
-        <CardOnCart :class="cart" />
-        <div v-if="cart === 'empty'" class="empty-cart">
+        <CardOnCart v-for="(item, i) in selected" :key="i"
+                    :item="item" />
+        <div v-if="isEmpty" class="empty-cart">
           <div class="empty-img">
             <img src="@/assets/img/empty-cart.png">
           </div>
@@ -27,7 +25,7 @@
         <div class="cart-total">
           <div class="total-result">
             <p>Total:</p>
-            <p>Rp. 105.000</p>
+            <p>{{ $store.getters.setRp(totalAmount) }}</p>
           </div>
           <span>*Belum termasuk ppn</span>
         </div>
@@ -44,9 +42,18 @@
 import CardOnCart from '@/components/part/CardOnCart.vue'
 
 export default {
-  data () {
-    return {
-      cart: ''
+  computed: {
+    selected () {
+      return this.$store.state.selected
+    },
+    isEmpty () {
+      return this.selected.length === 0
+    },
+    cartSum () {
+      return this.selected.length
+    },
+    totalAmount () {
+      return this.$store.getters.sumTotal
     }
   },
   components: {

@@ -58,7 +58,6 @@ body {
     margin-right: 23vw;
   }
 }
-
 .btn {
   border: none;
   font-family: 'Airbnb Cereal App', Avenir, Helvetica, Arial, sans-serif;

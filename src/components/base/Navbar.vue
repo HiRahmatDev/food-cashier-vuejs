@@ -11,7 +11,7 @@
         </button>
         <button @click="$emit('cart-clicked')" class="trolly">
           <img src="@/assets/img/shopping-cart.png">
-          <div class="badge-cart">0</div>
+          <div class="badge-cart">{{ cartSum }}</div>
         </button>
       </div>
     </div>
@@ -20,7 +20,11 @@
 
 <script>
 export default {
-
+  computed: {
+    cartSum () {
+      return this.$store.state.selected.length
+    }
+  }
 }
 </script>
 

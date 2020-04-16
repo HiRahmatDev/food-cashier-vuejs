@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="wrap-menu">
-      <Card :card="item" v-for="(item, i) in getMenu" :key="i" />
+      <Card v-for="(item, i) in getMenu" :key="i"
+            :card="item" :index="i"
+            @card-select="select" />
     </div>
   </div>
 </template>
@@ -20,9 +22,12 @@ export default {
     }
   },
   methods: {
+    select (id, index) {
+      this.$store.commit('SELECT_MENU', id, index)
+    }
   },
-  mounted () {
-    this.$store.dispatch('getApi', 'menu')
+  created () {
+    this.$store.dispatch('getApi')
   }
 }
 </script>
