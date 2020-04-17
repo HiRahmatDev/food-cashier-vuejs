@@ -10,9 +10,11 @@
 
 <script>
 import Card from '@/components/part/Card.vue'
+import dom from '@/mixins/dom.vue'
 
 export default {
   name: 'Home',
+  mixins: [dom],
   components: {
     Card
   },
@@ -24,6 +26,7 @@ export default {
   methods: {
     select (id, index) {
       this.$store.commit('SELECT_MENU', id, index)
+      this.showCart()
     }
   },
   created () {

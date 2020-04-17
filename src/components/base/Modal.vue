@@ -1,7 +1,7 @@
 <template>
-  <div class="modal d-none">
-    <div class="bg-modal"></div>
-    <div class="modal-wrap">
+  <div class="modal ">
+    <div @click="$emit('close-modal')" class="bg-modal off"></div>
+    <div class="modal-wrap off">
       <div class="modal-head">
         <h2>Add Item</h2>
       </div>
@@ -49,7 +49,7 @@
         </form>
       </div>
       <div class="modal-btn">
-        <button class="btn btn-secondary">Cancel</button>
+        <button @click="$emit('close-modal')" class="btn btn-secondary">Cancel</button>
         <button class="btn btn-primary">Add</button>
       </div>
     </div>
@@ -58,12 +58,78 @@
 
 <script>
 export default {
-
+  name: 'modal'
 }
 </script>
 
 <style lang="scss" scoped>
+@keyframes fade-in {
+  0% {
+    visibility: hidden;
+    opacity: 0
+  }
+  100% {
+    visibility: visible;
+    opacity: 1
+  }
+}
+@keyframes fade-out {
+  0% {
+    visibility: visible;
+    opacity: 1
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0
+  }
+}
+@keyframes pop-up {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  70% {
+    transform: scale(1.03);
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes pop-down {
+  0% {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.03);
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
 .bg-modal {
+  &.off {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.fade-in {
+    animation-name: fade-in;
+    animation-fill-mode: forwards;
+    animation-duration: .2s;
+    animation-timing-function: ease-out;
+  }
+  &.fade-out {
+    animation-name: fade-out;
+    animation-fill-mode: forwards;
+    animation-duration: .2s;
+    animation-timing-function: ease-out;
+  }
   position: fixed;
   z-index: 3;
   top: 0;
@@ -74,6 +140,24 @@ export default {
 }
 .modal {
   .modal-wrap {
+    animation-timing-function: ease-out;
+    &.off {
+      visibility: hidden;
+      transform: scale(0.7);
+      opacity: 0;
+    }
+    &.pop-up {
+      animation-name: pop-up;
+      animation-fill-mode: forwards;
+      animation-duration: .2s;
+      animation-timing-function: ease-out;
+    }
+    &.pop-down {
+      animation-name: pop-down;
+      animation-fill-mode: forwards;
+      animation-duration: .2s;
+      animation-timing-function: ease-out;
+    }
     position: fixed;
     z-index: 4;
     display: flex;

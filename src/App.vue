@@ -2,9 +2,9 @@
   <div id="food-cashier">
     <Navbar @modal-clicked="showModal"
             @cart-clicked="showCart" />
-    <Sidebar />
+    <Sidebar @modal-clicked="showModal" />
     <Cart @cart-clicked="hideCart" />
-    <Modal />
+    <Modal @close-modal="hideModal" />
     <router-view/>
   </div>
 </template>
@@ -14,8 +14,10 @@ import Navbar from '@/components/base/Navbar.vue'
 import Sidebar from '@/components/base/Sidebar.vue'
 import Cart from '@/components/base/Cart.vue'
 import Modal from '@/components/base/Modal.vue'
+import dom from '@/mixins/dom.vue'
 
 export default {
+  mixins: [dom],
   components: {
     Navbar,
     Sidebar,
@@ -23,21 +25,6 @@ export default {
     Modal
   },
   methods: {
-    showCart () {
-      document.getElementById('food-cashier').classList.add('cart-on')
-      document.querySelector('.trolly').classList.add('hidden')
-      document.querySelector('nav').classList.add('cart-on')
-      document.querySelector('.cart').classList.add('active')
-    },
-    hideCart () {
-      document.getElementById('food-cashier').classList.remove('cart-on')
-      document.querySelector('.trolly').classList.remove('hidden')
-      document.querySelector('nav').classList.remove('cart-on')
-      document.querySelector('.cart').classList.remove('active')
-    },
-    showModal () {
-      alert('cek')
-    }
   }
 }
 </script>

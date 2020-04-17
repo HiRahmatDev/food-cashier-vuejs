@@ -13,10 +13,11 @@
         <img src="@/assets/img/clipboard.png">
         <h2>History</h2>
       </router-link>
-      <router-link to="/add" class="add">
+      <a class="add"
+         @click="$emit('modal-clicked')" >
         <img src="@/assets/img/add.png">
         <h2 class="green">Add Item</h2>
-      </router-link>
+      </a>
     </div>
   </aside>
 </template>
@@ -57,6 +58,7 @@ export default {
     cursor: pointer;
     margin: 10px 0;
     padding: 10px;
+    outline: none;
     h2 {
       margin-left: 22px;
       color: rgb(27, 27, 27);
