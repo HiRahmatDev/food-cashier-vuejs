@@ -1,30 +1,36 @@
 <template>
   <aside class="sidebar">
-    <div>
-      <a class="burger">
-        <img src="@/assets/img/menu.png">
-        <h2>Menu</h2>
+    <div class="sidebar-wrap">
+      <a>
+        <div class="burger">
+          <img src="@/assets/img/menu.png">
+          <h2>Menu</h2>
+        </div>
       </a>
-      <router-link to="/" class="fork">
-        <img src="@/assets/img/fork.png">
-        <h2>Foods Items</h2>
+      <router-link class="page" to="/">
+        <div class="fork">
+          <img src="@/assets/img/fork.png">
+          <h2>Foods Items</h2>
+        </div>
       </router-link>
-      <router-link to="/history" class="clipboard">
-        <img src="@/assets/img/clipboard.png">
-        <h2>History</h2>
+      <router-link class="page" to="/history">
+        <div class="clipboard">
+          <img src="@/assets/img/clipboard.png">
+          <h2>History</h2>
+        </div>
       </router-link>
-      <a class="add"
-         @click="$emit('modal-clicked')" >
-        <img src="@/assets/img/add.png">
-        <h2 class="green">Add Item</h2>
-      </a>
+      <router-link class="page" to="/add">
+        <div class="add" @click="$emit('modal-clicked')" >
+          <img src="@/assets/img/add.png">
+          <h2 class="green">Add Item</h2>
+        </div>
+      </router-link>
     </div>
   </aside>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
@@ -46,19 +52,37 @@ export default {
     z-index: 3;
     transition-delay: .4s;
   }
-  div {
+  div.sidebar-wrap {
     display: flex;
     flex-direction: column;
   }
   a {
-    display: flex;
-    align-items: center;
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
     margin: 10px 0;
-    padding: 10px;
+    border-radius: 100px;
     outline: none;
+    border: none;
+    &.page {
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.048);
+      }
+    }
+    div {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 10px;
+      &.burger {
+        margin: 0px 3px;
+        padding: 6.5px 10px;
+        img {
+          height: 20px;
+        }
+      }
+      img {
+        height: 25px;
+      }
+    }
     h2 {
       margin-left: 22px;
       color: rgb(27, 27, 27);
@@ -67,18 +91,6 @@ export default {
       &.green {
         color: rgb(62, 161, 62);
       }
-    }
-    &.burger {
-      margin: 7.3px 3px;
-      img {
-        height: 20px;
-      }
-    }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.048);
-    }
-    img {
-      height: 25px;
     }
   }
 }

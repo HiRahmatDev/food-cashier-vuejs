@@ -3,8 +3,11 @@
     <Navbar @modal-clicked="showModal"
             @cart-clicked="showCart" />
     <Sidebar @modal-clicked="showModal" />
-    <Cart @cart-clicked="hideCart" />
-    <Modal @close-modal="hideModal" />
+    <Cart @cart-clicked="hideCart"
+          @checkout-clicked="showModalCheckout" />
+    <Modal :modal="modalAddItem"
+           @close-modal="hideModal" />
+    <ModalCheckout @close-modal="hideModalCheckout" />
     <router-view/>
   </div>
 </template>
@@ -14,17 +17,47 @@ import Navbar from '@/components/base/Navbar.vue'
 import Sidebar from '@/components/base/Sidebar.vue'
 import Cart from '@/components/base/Cart.vue'
 import Modal from '@/components/base/Modal.vue'
+import ModalCheckout from '@/components/base/ModalCheckout.vue'
 import dom from '@/mixins/dom.vue'
 
 export default {
+  data () {
+    return {
+      navbarTitle: '',
+      modalAddItem: {
+        titleHeader: 'Add Item',
+        buttonName: 'Add',
+        input: {
+          foodName: null,
+          imgUrl: null,
+          foodPrice: null,
+          category: null
+        }
+      }
+    }
+  },
   mixins: [dom],
   components: {
     Navbar,
     Sidebar,
     Cart,
-    Modal
+    Modal,
+    ModalCheckout
   },
   methods: {
+    addBook () {
+      const formData = new FormData()
+      formData.append('food_title', this.modalAddItem.input.foodName)
+      formData.append('id_category', this.modalAddItem.input.category)
+      formData.append('food_price', this.modalAddItem.input.foodPrice)
+      formData.append('img_url', this.modalAddItem.input.imgUrl)
+      const proto = {
+        mutation: 'ADD_ITEM',
+        urlPath: 'menu',
+        formData
+      }
+      this.$store.dispatch('postApi', proto)
+    }
   }
 }
 </script>

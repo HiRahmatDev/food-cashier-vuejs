@@ -16,14 +16,6 @@ export default {
     showModal () {
       const bgModal = document.querySelector('.bg-modal')
       const modalWrap = document.querySelector('.modal-wrap')
-      if (this.$route.path === '/add') {
-        bgModal.classList.replace('off', 'fade-in')
-        bgModal.classList.replace('fade-out', 'fade-in')
-        modalWrap.classList.replace('off', 'pop-up')
-        modalWrap.classList.replace('pop-down', 'pop-up')
-        return
-      }
-      this.$router.push('/add')
       bgModal.classList.replace('off', 'fade-in')
       bgModal.classList.replace('fade-out', 'fade-in')
       modalWrap.classList.replace('off', 'pop-up')
@@ -34,6 +26,20 @@ export default {
       const modalWrap = document.querySelector('.modal-wrap')
       bgModal.classList.replace('fade-in', 'fade-out')
       modalWrap.classList.replace('pop-up', 'pop-down')
+    },
+    showModalCheckout () {
+      const bgModalCheckout = document.querySelector('.bg-modal.checkout')
+      const modalWrapCheckout = document.querySelector('.modal-wrap.checkout')
+      bgModalCheckout.classList.replace('off', 'fade-in')
+      bgModalCheckout.classList.replace('fade-out', 'fade-in')
+      modalWrapCheckout.classList.replace('off', 'pop-up')
+      modalWrapCheckout.classList.replace('pop-down', 'pop-up')
+    },
+    hideModalCheckout () {
+      const bgModalCheckout = document.querySelector('.bg-modal.checkout')
+      const modalWrapCheckout = document.querySelector('.modal-wrap.checkout')
+      bgModalCheckout.classList.replace('fade-in', 'fade-out')
+      modalWrapCheckout.classList.replace('pop-up', 'pop-down')
     }
   }
 }

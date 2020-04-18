@@ -3,7 +3,7 @@
     <div @click="$emit('close-modal')" class="bg-modal off"></div>
     <div class="modal-wrap off">
       <div class="modal-head">
-        <h2>Add Item</h2>
+        <h2>{{ modal.titleHeader }}</h2>
       </div>
       <div class="modal-body">
         <form>
@@ -12,15 +12,18 @@
               <label for="name">Name</label>
             </div>
             <div class="input">
-              <input id="name" type="text">
+              <input id="name" v-model="modal.input.foodName" type="text">
             </div>
           </div>
           <div class="form-group">
             <div class="label">
               <label for="image">Image</label>
             </div>
-            <div class="input">
+            <!-- <div class="input">
               <input id="input" type="file">
+            </div> -->
+            <div class="input">
+              <input id="image" v-model="modal.input.imgUrl" type="text">
             </div>
           </div>
           <div class="form-group">
@@ -28,7 +31,7 @@
               <label for="price">Price</label>
             </div>
             <div class="input input-price">
-              <input id="price" type="number">
+              <input id="price" v-model="modal.input.foodPrice" type="number">
             </div>
           </div>
           <div class="form-group">
@@ -36,13 +39,11 @@
               <label for="category">Category</label>
             </div>
             <div class="input input-category">
-              <select id="category">
-                <option value="0" selected>Choose category..</option>
-                <option value="1">Bread</option>
-                <option value="2">Beverage</option>
-                <option value="3">Preserves</option>
-                <option value="4">Cereals</option>
-                <option value="5">Fruits & Fruit Juices</option>
+              <select @change="inputCategory($event)" id="category">
+                <option>Choose category...</option>
+                <option v-for="category in allCategory"
+                        :key="category.id"
+                        :value="category.id">{{ category.name_category }}</option>
               </select>
             </div>
           </div>
@@ -50,7 +51,7 @@
       </div>
       <div class="modal-btn">
         <button @click="$emit('close-modal')" class="btn btn-secondary">Cancel</button>
-        <button class="btn btn-primary">Add</button>
+        <button class="btn btn-primary">{{ modal.buttonName }}</button>
       </div>
     </div>
   </div>
@@ -58,7 +59,28 @@
 
 <script>
 export default {
-  name: 'modal'
+  name: 'modal',
+  props: ['modal'],
+  computed: {
+    allCategory () {
+      return this.$store.state.foodCategory
+    }
+  },
+  methods: {
+    getCategory () {
+      const proto = {
+        mutation: 'GET_CATEGORY',
+        urlPath: 'menu/category'
+      }
+      this.$store.dispatch('getApi', proto)
+    },
+    inputCategory (e) {
+      this.modal.input.category = e.target.value
+    }
+  },
+  created () {
+    this.getCategory()
+  }
 }
 </script>
 
@@ -128,7 +150,7 @@ export default {
     animation-name: fade-out;
     animation-fill-mode: forwards;
     animation-duration: .2s;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in;
   }
   position: fixed;
   z-index: 3;
@@ -156,7 +178,7 @@ export default {
       animation-name: pop-down;
       animation-fill-mode: forwards;
       animation-duration: .2s;
-      animation-timing-function: ease-out;
+      animation-timing-function: ease-in;
     }
     position: fixed;
     z-index: 4;
@@ -196,7 +218,7 @@ export default {
       .input {
         display: flex;
         width: 75%;
-        input {
+        input, select {
           width: 100%;
           font-family: 'Airbnb Cereal App', Avenir, Helvetica, Arial, sans-serif;
           font-size: 16px;
@@ -213,6 +235,9 @@ export default {
             width: 65%;
           }
         }
+        &.input-category {
+          select { width: 50%; }
+        }
       }
     }
   }
@@ -226,6 +251,7 @@ export default {
       font-size: 18px;
       padding: 8px;
       width: 100px;
+      cursor: pointer;
       &:first-child {
         margin-right: 14px;
       }

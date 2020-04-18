@@ -21,18 +21,18 @@
           <p>Please add some items from the menu</p>
         </div>
       </div>
-      <div class="cart-footer">
-        <div class="cart-total">
-          <div class="total-result">
-            <p>Total:</p>
-            <p>{{ $store.getters.setRp(totalAmount) }}</p>
-          </div>
-          <span>*Belum termasuk ppn</span>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <div class="total-result">
+          <p>Total:</p>
+          <p>Rp. {{ totalAmount }}*</p>
         </div>
-        <div class="cart-btn-group">
-          <button class="btn btn-primary">Checkout</button>
-          <button @click="$emit('cart-clicked')" class="btn btn-secondary">Cancel</button>
-        </div>
+        <span>*Belum termasuk ppn</span>
+      </div>
+      <div class="cart-btn-group">
+        <button @click="$emit('checkout-clicked')" class="btn btn-primary">Checkout</button>
+        <button @click="$emit('cart-clicked')" class="btn btn-secondary">Cancel</button>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
   z-index: 1;
   background-color: white;
   width: 0vw;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -122,10 +122,9 @@ export default {
 .wrap-body {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
+  overflow-y: auto;
   .cart-body {
-    overflow-y: scroll;
-    height: 60vh;
     .empty {
       display: none;
     }
@@ -153,33 +152,33 @@ export default {
       }
     }
   }
-  .cart-footer {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin-top: auto;
-    .cart-total {
-      padding: 0 5px;
-      text-align: left;
-      .total-result {
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        margin-bottom: 4px;
-        font-weight: bold;
-      }
-      span {
-        font-size: 12px;
-      }
+}
+.cart-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-top: auto;
+  .cart-total {
+    padding: 0 5px;
+    text-align: left;
+    .total-result {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      font-weight: bold;
     }
-    .cart-btn-group {
-      button {
-        width: 100%;
-        margin: 5px 0;
-        padding: 6px 0;
-        border-radius: 2px;
-        cursor: pointer;
-      }
+    span {
+      font-size: 12px;
+    }
+  }
+  .cart-btn-group {
+    button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 6px 0;
+      border-radius: 2px;
+      cursor: pointer;
     }
   }
 }

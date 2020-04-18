@@ -11,7 +11,7 @@
           <input v-model="counter" type="number">
           <button @click="increment" >+</button>
         </div>
-        <span>{{ $store.getters.setRp(timesPrice) }}</span>
+        <span>Rp. {{ timesPrice }}</span>
       </div>
     </div>
   </div>

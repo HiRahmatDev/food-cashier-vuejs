@@ -1,22 +1,17 @@
 <template>
-  <div class="home">
-    <div class="wrap-menu">
-      <Card v-for="(item, i) in allMenu" :key="i"
-            :card="item" :index="i"
-            @card-select="select" />
+  <div class="history">
+    <div class="wrap-history">
     </div>
   </div>
 </template>
 
 <script>
-import Card from '@/components/part/Card.vue'
 import dom from '@/mixins/dom.vue'
 
 export default {
-  name: 'Home',
+  name: 'History',
   mixins: [dom],
   components: {
-    Card
   },
   computed: {
     allMenu () {
@@ -43,18 +38,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
+.history {
   margin: 54px 0 0 60px;
   padding: 15px;
   box-sizing: border-box;
   height: 90vh;
   overflow-y: scroll;
-  .wrap-menu {
+  .wrap-history {
     display: flex;
     flex-wrap: wrap;
   }
-}
-.card {
-  margin: 10px;
 }
 </style>

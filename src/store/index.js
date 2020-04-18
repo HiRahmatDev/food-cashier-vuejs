@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     foodMenu: [],
+    foodCategory: [],
     selected: []
   },
   getters: {
@@ -21,8 +22,14 @@ export default new Vuex.Store({
     setRp: () => price => 'Rp. ' + price
   },
   mutations: {
-    GET_MENU (state, data) {
-      state.foodMenu = data
+    GET_ITEM (state, result) {
+      state.foodMenu = result
+    },
+    ADD_ITEM (state, result) {
+      state.foodMenu.push(result)
+    },
+    GET_CATEGORY (state, result) {
+      state.foodCategory = result
     },
     SELECT_MENU (state, id) {
       const data = state.foodMenu.filter(item => item.id === id)
@@ -92,10 +99,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getApi (context) {
-      Axios.get(process.env.VUE_APP_URL_API + 'menu')
+    getApi (context, proto) {
+      Axios.get(process.env.VUE_APP_URL_API + proto.urlPath)
         .then(res => {
-          context.commit('GET_MENU', res.data)
+          context.commit(proto.mutation, res.data)
+        })
+    },
+    postApi (context, proto) {
+      Axios.post(process.env.VUE_APP_URL_API + proto.urlPath, proto.formData)
+        .then(res => {
+          context.commit(proto.mutation, res.data)
         })
     }
   },

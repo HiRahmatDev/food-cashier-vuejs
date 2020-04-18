@@ -4,7 +4,7 @@
       <button class="burger">
         <img src="@/assets/img/menu.png">
       </button>
-      <h1>Food Items</h1>
+      <h1>{{ $route.name }}</h1>
       <div>
         <button class="search">
           <img src="@/assets/img/magnifying-glass.png">
@@ -52,9 +52,11 @@ nav {
       padding: 10px;
       background-color: transparent;
       border: none;
+      outline: none;
       cursor: pointer;
     }
     .burger {
+      cursor: auto;
       img {
         height: 20px;
       }

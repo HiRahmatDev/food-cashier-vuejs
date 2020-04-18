@@ -8,7 +8,7 @@
     </div>
     <div class="text-wrap">
       <p class="title-menu">{{ card.food_title }}</p>
-      <p class="price">{{ setRp }}</p>
+      <p class="price">Rp. {{ this.card.food_price }}</p>
     </div>
   </div>
 </template>
@@ -17,9 +17,6 @@
 export default {
   props: ['card', 'index'],
   computed: {
-    setRp () {
-      return 'Rp. ' + this.card.food_price
-    },
     isSelected () {
       return this.$store.getters.isSelected(this.card.id)
     }
