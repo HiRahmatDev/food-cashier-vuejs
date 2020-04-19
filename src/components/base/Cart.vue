@@ -26,7 +26,7 @@
       <div class="cart-total">
         <div class="total-result">
           <p>Total:</p>
-          <p>Rp. {{ totalAmount }}*</p>
+          <p>Rp. {{ $store.getters.sumTotal }}*</p>
         </div>
         <span>*Belum termasuk ppn</span>
       </div>
@@ -51,9 +51,6 @@ export default {
     },
     cartSum () {
       return this.selected.length
-    },
-    totalAmount () {
-      return this.$store.getters.sumTotal
     }
   },
   components: {

@@ -8,7 +8,9 @@ export default new Vuex.Store({
   state: {
     foodMenu: [],
     foodCategory: [],
-    selected: []
+    selected: [],
+    checkout: [],
+    ppn: 10
   },
   getters: {
     isSelected: state => id => {
@@ -16,10 +18,9 @@ export default new Vuex.Store({
       const selectedRows = state.selected.filter(item => item.id === id)
       return (selectedRows.length === data.length)
     },
-    sumTotal: state => {
-      return state.selected.reduce((total, item) => total + item.times_price, 0)
-    },
-    setRp: () => price => 'Rp. ' + price
+    sumTotal: state => state.selected.reduce((total, item) => total + item.times_price, 0),
+    sumPpn: (state, getters) => getters.sumTotal * (state.ppn / 100),
+    sumTotalPpn: (state, getters) => getters.sumTotal + getters.sumPpn
   },
   mutations: {
     GET_ITEM (state, result) {
@@ -44,14 +45,14 @@ export default new Vuex.Store({
         img_url: data[0].img_url
       }
       if (state.selected.length === 0 || selectedRows[0] === undefined) {
-        state.selected.unshift(dataSelected)
+        state.selected.push(dataSelected)
       } else {
         if (dataSelected.id === selectedRows[0].id) {
           const currentId = state.selected.map(item => item.id).indexOf(id)
           state.selected.splice(currentId, 1)
           return
         }
-        state.selected.unshift(dataSelected)
+        state.selected.push(dataSelected)
       }
     },
     INCREMENT (state, dataUpdate) {

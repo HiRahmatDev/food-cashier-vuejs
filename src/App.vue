@@ -1,13 +1,15 @@
 <template>
   <div id="food-cashier">
-    <Navbar @modal-clicked="showModal"
-            @cart-clicked="showCart" />
-    <Sidebar @modal-clicked="showModal" />
-    <Cart @cart-clicked="hideCart"
-          @checkout-clicked="showModalCheckout" />
-    <Modal :modal="modalAddItem"
-           @close-modal="hideModal" />
-    <ModalCheckout @close-modal="hideModalCheckout" />
+    <div v-if="$route.name !== 'Register' && $route.name !== 'Login' && $route.name !== 'User'">
+      <Navbar @modal-clicked="showModal"
+              @cart-clicked="showCart" />
+      <Sidebar @modal-clicked="showModal" />
+      <Cart @cart-clicked="cancelOrder"
+            @checkout-clicked="showModalCheckout" />
+      <Modal :modal="modalAddItem"
+            @close-modal="hideModal" />
+      <ModalCheckout @close-modal="hideModalCheckout" />
+    </div>
     <router-view/>
   </div>
 </template>
@@ -21,6 +23,7 @@ import ModalCheckout from '@/components/base/ModalCheckout.vue'
 import dom from '@/mixins/dom.vue'
 
 export default {
+  mixins: [dom],
   data () {
     return {
       navbarTitle: '',
@@ -36,7 +39,6 @@ export default {
       }
     }
   },
-  mixins: [dom],
   components: {
     Navbar,
     Sidebar,
@@ -45,6 +47,12 @@ export default {
     ModalCheckout
   },
   methods: {
+    cancelOrder () {
+      this.hideCart()
+      setTimeout(() => {
+        this.$store.state.selected = []
+      }, 300)
+    },
     addBook () {
       const formData = new FormData()
       formData.append('food_title', this.modalAddItem.input.foodName)

@@ -8,7 +8,7 @@
       <div class="cart-count">
         <div class="group-counter">
           <button @click="decrement" >-</button>
-          <input v-model="counter" type="number">
+          <input v-model="counter" @input="changeCounter" type="number">
           <button @click="increment" >+</button>
         </div>
         <span>Rp. {{ timesPrice }}</span>
@@ -40,7 +40,7 @@ export default {
       this.$store.commit('INCREMENT', data)
     },
     decrement () {
-      if (this.counter === 1) {
+      if (this.counter <= 1) {
         this.$store.commit('DELETE_MENU', this.item.id)
         return
       }
@@ -50,6 +50,14 @@ export default {
         counter: this.counter
       }
       this.$store.commit('DECREMENT', data)
+    },
+    changeCounter () {
+      if (this.counter === '') return
+      if (this.counter <= 0) {
+        setTimeout(() => {
+          this.$store.commit('DELETE_MENU', this.item.id)
+        }, 500)
+      }
     }
   }
 }

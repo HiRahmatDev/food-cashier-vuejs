@@ -12,17 +12,17 @@
         </div>
       </div>
       <div class="modal-body">
-        <div class="row item-selected">
-          <p class="side-left item-name">Coffee Latte 1x</p>
-          <p class="side-right item-price">Rp. 15000</p>
+        <div v-for="item in selectedItem" :key="item.id" class="row item-selected">
+          <p class="side-left item-name">{{ item.food_title }} {{ item.counter }}x</p>
+          <p class="side-right item-price">Rp. {{ item.times_price }}</p>
         </div>
         <div class="row ppn">
           <p class="side-left ppn-percent">Ppn 10%</p>
-          <p class="side-right ppn-price">Rp. 10500</p>
+          <p class="side-right ppn-price">Rp. {{ $store.getters.sumPpn }}</p>
         </div>
         <div class="row total-amount">
           <p class="side-left total-name">Total:</p>
-          <p class="side-right total-price">Rp. 10000</p>
+          <p class="side-right total-price">Rp. {{ $store.getters.sumTotalPpn }}</p>
         </div>
       </div>
       <div class="modal-btn">
@@ -39,7 +39,12 @@
 
 <script>
 export default {
-  name: 'modal-checkout'
+  name: 'modal-checkout',
+  computed: {
+    selectedItem () {
+      return this.$store.state.selected
+    }
+  }
 }
 </script>
 
@@ -184,17 +189,23 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: 10px 0;
+      &:first-child {
+        padding: 0 0 10px;
+      }
       &.total-amount {
-        padding: 18px 0;
+        padding: 18px 0 0;
       }
       .side-left {
         display: flex;
+        text-align: left;
         &.total-name {
           margin-left: auto;
         }
       }
       .side-right {
         display: flex;
+        text-align: right;
+        white-space: nowrap;
         padding-left: 15px;
       }
     }

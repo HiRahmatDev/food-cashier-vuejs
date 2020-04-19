@@ -19,12 +19,12 @@
           <h2>History</h2>
         </div>
       </router-link>
-      <router-link class="page" to="/add">
+      <a class="page">
         <div class="add" @click="$emit('modal-clicked')" >
           <img src="@/assets/img/add.png">
           <h2 class="green">Add Item</h2>
         </div>
-      </router-link>
+      </a>
     </div>
   </aside>
 </template>

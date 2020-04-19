@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     select (id, index) {
-      this.$store.commit('SELECT_MENU', id, index)
+      this.$store.commit('SELECT_MENU', id)
       this.showCart()
     },
     getItem () {

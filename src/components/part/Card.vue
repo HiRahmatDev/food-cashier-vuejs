@@ -1,5 +1,5 @@
 <template>
-  <div @click="$emit('card-select', card.id, index)" class="card">
+  <div @click="$emit('card-select', card.id)" class="card">
     <div class="img-wrap">
       <div v-if="isSelected" class="checked">
         <img src="@/assets/img/checked.png" alt="">
@@ -8,7 +8,7 @@
     </div>
     <div class="text-wrap">
       <p class="title-menu">{{ card.food_title }}</p>
-      <p class="price">Rp. {{ this.card.food_price }}</p>
+      <p class="price">Rp. {{ card.food_price }}</p>
     </div>
   </div>
 </template>
