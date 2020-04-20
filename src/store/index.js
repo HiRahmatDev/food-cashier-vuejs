@@ -12,7 +12,8 @@ export default new Vuex.Store({
     checkout: [],
     cartSum: 0,
     ppn: 10,
-    token: localStorage.token || null
+    token: localStorage.token || null,
+    msgModal: null
   },
   getters: {
     isLogin: state => state.token !== null,
@@ -30,7 +31,7 @@ export default new Vuex.Store({
       state.foodMenu = result
     },
     ADD_ITEM (state, result) {
-      state.foodMenu.push(result)
+      state.msgModal = result
     },
     GET_CATEGORY (state, result) {
       state.foodCategory = result
@@ -54,7 +55,7 @@ export default new Vuex.Store({
         if (dataSelected.id === selectedRows[0].id) {
           const currentId = state.selected.map(item => item.id).indexOf(id)
           state.selected.splice(currentId, 1)
-          // state.cartSum = state.selected.length
+          state.cartSum = state.selected.length
           return
         }
         state.selected.push(dataSelected)
@@ -153,7 +154,7 @@ export default new Vuex.Store({
         })
     },
     postApi (context, proto) {
-      Axios.post(process.env.VUE_APP_URL_API + proto.urlPath, proto.formData)
+      Axios.post(process.env.VUE_APP_URL_API + proto.urlPath, proto.dataItem)
         .then(res => {
           context.commit(proto.mutation, res.data)
         })

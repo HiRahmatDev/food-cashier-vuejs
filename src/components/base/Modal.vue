@@ -51,7 +51,7 @@
       </div>
       <div class="modal-btn">
         <button @click="$emit('close-modal')" class="btn btn-secondary">Cancel</button>
-        <button class="btn btn-primary">{{ modal.buttonName }}</button>
+        <button @click="$emit('submit')" class="btn btn-primary">{{ modal.buttonName }}</button>
       </div>
     </div>
   </div>

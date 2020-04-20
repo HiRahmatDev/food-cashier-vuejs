@@ -8,8 +8,10 @@
             @cancel-clicked="cancelOrder"
             @checkout-clicked="showModalCheckout" />
       <Modal :modal="modalAddItem"
-            @close-modal="hideModal" />
+            @close-modal="hideModal"
+            @submit="addItem" />
       <ModalCheckout @close-modal="hideModalCheckout" />
+      <ModalFlash :modalLogout="modalLogout" />
     </div>
     <router-view/>
   </div>
@@ -21,6 +23,7 @@ import Sidebar from '@/components/base/Sidebar.vue'
 import Cart from '@/components/base/Cart.vue'
 import Modal from '@/components/base/Modal.vue'
 import ModalCheckout from '@/components/base/ModalCheckout.vue'
+import ModalFlash from '@/components/base/ModalFlash.vue'
 import dom from '@/mixins/dom.vue'
 
 export default {
@@ -30,12 +33,20 @@ export default {
       navbarTitle: '',
       modalAddItem: {
         titleHeader: 'Add Item',
-        buttonName: 'Add',
         input: {
           foodName: null,
           imgUrl: null,
           foodPrice: null,
           category: null
+        },
+        buttonName: 'Add'
+      },
+      modalLogout: {
+        titleHeader: 'Yakin mau keluar?',
+        titleBody: '',
+        button: {
+          pro: 'Iya',
+          con: 'Batal'
         }
       }
     }
@@ -45,7 +56,8 @@ export default {
     Sidebar,
     Cart,
     Modal,
-    ModalCheckout
+    ModalCheckout,
+    ModalFlash
   },
   methods: {
     cancelOrder () {
@@ -55,18 +67,33 @@ export default {
         this.$store.state.cartSum = 0
       }, 300)
     },
-    addBook () {
-      const formData = new FormData()
-      formData.append('food_title', this.modalAddItem.input.foodName)
-      formData.append('id_category', this.modalAddItem.input.category)
-      formData.append('food_price', this.modalAddItem.input.foodPrice)
-      formData.append('img_url', this.modalAddItem.input.imgUrl)
+    getItem () {
+      const proto = {
+        mutation: 'GET_ITEM',
+        urlPath: 'menu'
+      }
+      this.$store.dispatch('getApi', proto)
+    },
+    addItem () {
+      // const formData = new FormData()
+      // formData.append('food_title', this.modalAddItem.input.foodName)
+      // formData.append('id_category', this.modalAddItem.input.category)
+      // formData.append('food_price', this.modalAddItem.input.foodPrice)
+      // formData.append('img_url', this.modalAddItem.input.imgUrl)
+      const dataItem = {
+        food_title: this.modalAddItem.input.foodName,
+        id_category: this.modalAddItem.input.category,
+        food_price: this.modalAddItem.input.foodPrice,
+        img_url: this.modalAddItem.input.imgUrl
+      }
       const proto = {
         mutation: 'ADD_ITEM',
         urlPath: 'menu',
-        formData
+        dataItem
       }
       this.$store.dispatch('postApi', proto)
+      this.hideModal()
+      this.getItem()
     }
   }
 }
