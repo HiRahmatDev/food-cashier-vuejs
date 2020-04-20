@@ -21,6 +21,9 @@ export default {
   computed: {
     allMenu () {
       return this.$store.state.foodMenu
+    },
+    allCategory () {
+      return this.$store.state.foodCategory
     }
   },
   methods: {
@@ -49,6 +52,17 @@ export default {
   box-sizing: border-box;
   height: 90vh;
   overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
   .wrap-menu {
     display: flex;
     flex-wrap: wrap;

@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import jwt from 'jsonwebtoken'
-
 export default {
   data () {
     return {
@@ -45,7 +43,8 @@ export default {
       password: '',
       error: false,
       flashMsg: null,
-      flashInfo: ''
+      flashInfo: '',
+      token: null
     }
   },
   methods: {
@@ -62,38 +61,53 @@ export default {
         })
     },
     logInSuccess (response) {
-      if (response.status === 203) {
+      if (response.data.status === 'danger') {
         this.flashInfo = response.data.status
         this.flashMsg = response.data.info
         delete localStorage.token
+        this.$store.commit('DELETE_TOKEN')
         return
       }
-      if (response.data.is_active === 0) {
-        this.flashInfo = 'warning'
-        this.flashMsg = 'Your email is not verified!'
+      if (response.data.status === 'warning') {
+        this.flashInfo = response.data.status
+        this.flashMsg = response.data.info
+        this.token = response.data.token
         delete localStorage.token
+        this.$store.commit('DELETE_TOKEN')
         return
       }
       this.flashInfo = response.data.status
       this.flashMsg = response.data.info
       setTimeout(() => {
-        this.$router.push('/')
+        this.$router.go('/')
       }, 1000)
       localStorage.token = response.data.token
+      // this.$store.commit('ADD_TOKEN')
     },
     sendEmail () {
       this.flashMsg = 'please wait...'
-      const token = jwt.verify(localStorage.token, process.env.VUE_APP_SECRET_KEY)
-      const dataUser = {
-        token
-      }
-      this.$http.post(process.env.VUE_APP_URL_API + 'auth/send-email', dataUser)
+      this.$http.post(process.env.VUE_APP_URL_API + 'auth/send-email', { token: this.token })
         .then(res => {
+          this.token = null
           this.flashInfo = 'success'
           this.flashMsg = res.data.msg
           delete localStorage.token
+          this.$store.commit('DELETE_TOKEN')
+        })
+    },
+    confirm () {
+      if (!this.$route.query.confirm) {
+        return
+      }
+      this.$http.post(process.env.VUE_APP_URL_API + 'auth/confirm', { token: this.$route.query.confirm })
+        .then(res => {
+          this.flashInfo = res.data.status
+          this.flashMsg = res.data.info
         })
     }
+  },
+  mounted () {
+    this.confirm()
   }
 }
 </script>

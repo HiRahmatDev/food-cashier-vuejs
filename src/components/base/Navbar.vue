@@ -22,7 +22,7 @@
 export default {
   computed: {
     cartSum () {
-      return this.$store.state.selected.length
+      return this.$store.state.cartSum
     }
   }
 }

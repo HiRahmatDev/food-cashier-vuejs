@@ -12,10 +12,13 @@
         </div>
       </div>
       <div class="modal-body">
-        <div v-for="item in selectedItem" :key="item.id" class="row item-selected">
+        <div class="row item-selected"
+             v-for="item in selectedItem" :key="item.id" >
           <p class="side-left item-name">{{ item.food_title }} {{ item.counter }}x</p>
           <p class="side-right item-price">Rp. {{ item.times_price }}</p>
         </div>
+      </div>
+      <div class="modal-btn">
         <div class="row ppn">
           <p class="side-left ppn-percent">Ppn 10%</p>
           <p class="side-right ppn-price">Rp. {{ $store.getters.sumPpn }}</p>
@@ -24,8 +27,6 @@
           <p class="side-left total-name">Total:</p>
           <p class="side-right total-price">Rp. {{ $store.getters.sumTotalPpn }}</p>
         </div>
-      </div>
-      <div class="modal-btn">
         <div class="payment-type">
           <p>Payment: Cash</p>
         </div>
@@ -185,32 +186,43 @@ export default {
     padding: 18px;
     height: 50vh;
     overflow-y: auto;
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      &:first-child {
-        padding: 0 0 10px;
-      }
-      &.total-amount {
-        padding: 18px 0 0;
-      }
-      .side-left {
-        display: flex;
-        text-align: left;
-        &.total-name {
-          margin-left: auto;
-        }
-      }
-      .side-right {
-        display: flex;
-        text-align: right;
-        white-space: nowrap;
-        padding-left: 15px;
-      }
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #dbdbdb;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10px;
     }
     p {
       font-weight: bold;
+    }
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    &:first-child {
+      padding: 0 0 10px;
+    }
+    &.total-amount, &.ppn {
+      padding: 6px 0 0;
+    }
+    .side-left {
+      display: flex;
+      text-align: left;
+      &.total-name {
+        margin-left: auto;
+      }
+    }
+    .side-right {
+      display: flex;
+      text-align: right;
+      white-space: nowrap;
+      padding-left: 15px;
     }
   }
   .modal-btn {
@@ -218,6 +230,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    padding-top: 0;
     .payment-type {
       padding-bottom: 24px;
       p {

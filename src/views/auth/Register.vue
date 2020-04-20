@@ -73,14 +73,28 @@ export default {
         }
         return
       }
+      if (this.password1 !== this.password2) {
+        this.flashInfo = 'danger'
+        this.flashMsg = {
+          head: 'Password is not matched!'
+        }
+        return
+      }
       this.$http.post(process.env.VUE_APP_URL_API + 'auth/register', dataUser)
         .then(res => {
           this.signInSuccess(res)
         })
     },
     signInSuccess (response) {
-      this.flashInfo = response.data.status
-      this.flashMsg = response.data.info
+      this.$http.post(process.env.VUE_APP_URL_API + 'auth/send-email', { token: response.data.token })
+        .then(() => {
+          this.flashInfo = response.data.status
+          this.flashMsg = response.data.info
+        })
+        .catch(() => {
+          this.flashInfo = response.data.status
+          this.flashMsg = response.data.info
+        })
     }
   }
 }

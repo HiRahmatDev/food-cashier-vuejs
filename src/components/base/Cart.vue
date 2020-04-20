@@ -32,7 +32,7 @@
       </div>
       <div class="cart-btn-group">
         <button @click="$emit('checkout-clicked')" class="btn btn-primary">Checkout</button>
-        <button @click="$emit('cart-clicked')" class="btn btn-secondary">Cancel</button>
+        <button @click="$emit('cancel-clicked')" class="btn btn-secondary">Cancel</button>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@ export default {
       return this.selected.length === 0
     },
     cartSum () {
-      return this.selected.length
+      return this.$store.state.cartSum
     }
   },
   components: {
@@ -121,6 +121,17 @@ export default {
   flex-direction: column;
   height: 100vh;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #dbdbdb;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
   .cart-body {
     .empty {
       display: none;

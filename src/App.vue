@@ -4,7 +4,8 @@
       <Navbar @modal-clicked="showModal"
               @cart-clicked="showCart" />
       <Sidebar @modal-clicked="showModal" />
-      <Cart @cart-clicked="cancelOrder"
+      <Cart @cart-clicked="hideCart"
+            @cancel-clicked="cancelOrder"
             @checkout-clicked="showModalCheckout" />
       <Modal :modal="modalAddItem"
             @close-modal="hideModal" />
@@ -51,6 +52,7 @@ export default {
       this.hideCart()
       setTimeout(() => {
         this.$store.state.selected = []
+        this.$store.state.cartSum = 0
       }, 300)
     },
     addBook () {
@@ -84,7 +86,7 @@ body {
   color: #000;
   transition: .3s;
   &.cart-on {
-    margin-right: 23vw;
+    margin-right: 25vw;
   }
 }
 .btn {

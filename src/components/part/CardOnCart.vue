@@ -8,7 +8,7 @@
       <div class="cart-count">
         <div class="group-counter">
           <button @click="decrement" >-</button>
-          <input v-model="counter" @input="changeCounter" type="number">
+          <input v-model="item.counter" @input="changeCounter" type="number">
           <button @click="increment" >+</button>
         </div>
         <span>Rp. {{ timesPrice }}</span>
@@ -20,44 +20,32 @@
 <script>
 export default {
   props: ['item'],
-  data () {
-    return {
-      counter: this.item.counter
-    }
-  },
   computed: {
     timesPrice () {
-      return this.counter * this.item.food_price
+      return this.item.counter * this.item.food_price
     }
   },
   methods: {
     increment () {
-      this.counter++
       const data = {
         id: this.item.id,
-        counter: this.counter
+        counter: this.item.counter
       }
       this.$store.commit('INCREMENT', data)
     },
     decrement () {
-      if (this.counter <= 1) {
-        this.$store.commit('DELETE_MENU', this.item.id)
-        return
-      }
-      this.counter--
       const data = {
         id: this.item.id,
-        counter: this.counter
+        counter: this.item.counter
       }
       this.$store.commit('DECREMENT', data)
     },
     changeCounter () {
-      if (this.counter === '') return
-      if (this.counter <= 0) {
-        setTimeout(() => {
-          this.$store.commit('DELETE_MENU', this.item.id)
-        }, 500)
+      const data = {
+        id: this.item.id,
+        counter: this.item.counter
       }
+      this.$store.commit('CHANGE_COUNTER', data)
     }
   }
 }
@@ -68,7 +56,7 @@ export default {
   display: flex;
   padding: 20px;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.068);
+    background-color: rgba(0, 0, 0, 0.048);
   }
   .cart-img {
     width: 30%;

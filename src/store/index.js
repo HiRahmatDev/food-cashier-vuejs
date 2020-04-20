@@ -10,9 +10,12 @@ export default new Vuex.Store({
     foodCategory: [],
     selected: [],
     checkout: [],
-    ppn: 10
+    cartSum: 0,
+    ppn: 10,
+    token: localStorage.token || null
   },
   getters: {
+    isLogin: state => state.token !== null,
     isSelected: state => id => {
       const data = state.foodMenu.filter(item => item.id === id)
       const selectedRows = state.selected.filter(item => item.id === id)
@@ -40,52 +43,23 @@ export default new Vuex.Store({
         food_title: data[0].food_title,
         id_category: data[0].id_category,
         food_price: data[0].food_price,
-        counter: 1,
+        counter: data[0].counter,
         times_price: data[0].food_price,
         img_url: data[0].img_url
       }
       if (state.selected.length === 0 || selectedRows[0] === undefined) {
         state.selected.push(dataSelected)
+        state.cartSum = state.selected.length
       } else {
         if (dataSelected.id === selectedRows[0].id) {
           const currentId = state.selected.map(item => item.id).indexOf(id)
           state.selected.splice(currentId, 1)
+          // state.cartSum = state.selected.length
           return
         }
         state.selected.push(dataSelected)
+        state.cartSum = state.selected.length
       }
-    },
-    INCREMENT (state, dataUpdate) {
-      const data = state.foodMenu.filter(item => item.id === dataUpdate.id)
-      const dataSelected = [
-        {
-          id: data[0].id,
-          food_title: data[0].food_title,
-          id_category: data[0].id_category,
-          food_price: data[0].food_price,
-          counter: dataUpdate.counter,
-          times_price: data[0].food_price * dataUpdate.counter,
-          img_url: data[0].img_url
-        }
-      ]
-      const updated = state.selected.map(select => dataSelected.find(update => update.id === select.id) || select)
-      state.selected = updated
-    },
-    DECREMENT (state, dataUpdate) {
-      const data = state.foodMenu.filter(item => item.id === dataUpdate.id)
-      const dataSelected = [
-        {
-          id: data[0].id,
-          food_title: data[0].food_title,
-          id_category: data[0].id_category,
-          food_price: data[0].food_price,
-          counter: dataUpdate.counter,
-          times_price: data[0].food_price * dataUpdate.counter,
-          img_url: data[0].img_url
-        }
-      ]
-      const updated = state.selected.map(select => dataSelected.find(update => update.id === select.id) || select)
-      state.selected = updated
     },
     DELETE_MENU (state, id) {
       const data = state.foodMenu.filter(item => item.id === id)
@@ -97,6 +71,78 @@ export default new Vuex.Store({
           state.selected.splice(currentId, 1)
         }
       }
+    },
+    CART_SUM (state) {
+      state.cartSum = state.selected.length
+    },
+    INCREMENT (state, dataUpdate) {
+      const data = state.foodMenu.filter(item => item.id === dataUpdate.id)
+      const dataSelected = [
+        {
+          id: data[0].id,
+          food_title: data[0].food_title,
+          id_category: data[0].id_category,
+          food_price: data[0].food_price,
+          counter: dataUpdate.counter + 1,
+          times_price: data[0].food_price * dataUpdate.counter,
+          img_url: data[0].img_url
+        }
+      ]
+      const updated = state.selected.map(select => dataSelected.find(update => update.id === select.id) || select)
+      state.selected = updated
+      state.cartSum += dataUpdate.counter - (dataUpdate.counter - 1)
+    },
+    DECREMENT (state, dataUpdate) {
+      const data = state.foodMenu.filter(item => item.id === dataUpdate.id)
+      if (dataUpdate.counter <= 1) {
+        const currentId = state.selected.map(item => item.id).indexOf(dataUpdate.id)
+        state.selected.splice(currentId, 1)
+        state.cartSum -= dataUpdate.counter - (dataUpdate.counter - 1)
+        return
+      }
+      const dataSelected = [
+        {
+          id: data[0].id,
+          food_title: data[0].food_title,
+          id_category: data[0].id_category,
+          food_price: data[0].food_price,
+          counter: dataUpdate.counter - 1,
+          times_price: data[0].food_price * dataUpdate.counter,
+          img_url: data[0].img_url
+        }
+      ]
+      const updated = state.selected.map(select => dataSelected.find(update => update.id === select.id) || select)
+      state.selected = updated
+      state.cartSum -= dataUpdate.counter - (dataUpdate.counter - 1)
+    },
+    CHANGE_COUNTER (state, dataUpdate) {
+      const data = state.foodMenu.filter(item => item.id === dataUpdate.id)
+      if (dataUpdate.counter === '') return
+      if (dataUpdate.counter < 1) {
+        const currentId = state.selected.map(item => item.id).indexOf(dataUpdate.id)
+        state.selected.splice(currentId, 1)
+        state.cartSum -= dataUpdate.counter - (dataUpdate.counter - 1)
+        return
+      }
+      const dataSelected = [
+        {
+          id: data[0].id,
+          food_title: data[0].food_title,
+          id_category: data[0].id_category,
+          food_price: data[0].food_price,
+          counter: dataUpdate.counter,
+          times_price: data[0].food_price * dataUpdate.counter,
+          img_url: data[0].img_url
+        }
+      ]
+      const updated = state.selected.map(select => dataSelected.find(update => update.id === select.id) || select)
+      state.selected = updated
+    },
+    ADD_TOKEN (state) {
+      state.token = localStorage.token
+    },
+    DELETE_TOKEN (state) {
+      state.token = null
     }
   },
   actions: {
