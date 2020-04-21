@@ -30,6 +30,8 @@ export default {
     select (id, index) {
       this.$store.commit('SELECT_MENU', id)
       this.showCart()
+      if (this.$store.state.selected.length > 0) return
+      if (this.$store.state.selected.length === 0) this.hideCart()
     }
   }
 }
