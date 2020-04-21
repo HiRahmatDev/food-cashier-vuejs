@@ -38,7 +38,7 @@ nav {
   font-size: 20px;
   font-weight: bold;
   padding: 6px 0;
-  z-index: 1;
+  z-index: 2;
   transition: .3s;
   &.cart-on {
     width: 75vw;

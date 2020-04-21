@@ -30,17 +30,7 @@ export default {
     select (id, index) {
       this.$store.commit('SELECT_MENU', id)
       this.showCart()
-    },
-    getItem () {
-      const proto = {
-        mutation: 'GET_ITEM',
-        urlPath: 'menu'
-      }
-      this.$store.dispatch('getApi', proto)
     }
-  },
-  created () {
-    this.getItem()
   }
 }
 </script>

@@ -81,8 +81,10 @@ export default {
       setTimeout(() => {
         this.$router.go('/')
       }, 1000)
-      localStorage.token = response.data.token
-      // this.$store.commit('ADD_TOKEN')
+      localStorage.token = JSON.stringify({
+        id: response.data.id,
+        token: response.data.token
+      })
     },
     sendEmail () {
       this.flashMsg = 'please wait...'

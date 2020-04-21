@@ -40,6 +40,20 @@ export default {
       const modalWrapCheckout = document.querySelector('.modal-wrap.checkout')
       bgModalCheckout.classList.replace('fade-in', 'fade-out')
       modalWrapCheckout.classList.replace('pop-up', 'pop-down')
+    },
+    showFlash () {
+      const bgModalCheckout = document.querySelector('.modal.flash')
+      const modalWrapCheckout = document.querySelector('.modal-wrap.flash')
+      bgModalCheckout.classList.replace('off', 'fade-in')
+      bgModalCheckout.classList.replace('fade-out', 'fade-in')
+      modalWrapCheckout.classList.replace('off', 'pop-up')
+      modalWrapCheckout.classList.replace('pop-down', 'pop-up')
+    },
+    hideFlash () {
+      const bgModalCheckout = document.querySelector('.modal.flash')
+      const modalWrapCheckout = document.querySelector('.modal-wrap.flash')
+      bgModalCheckout.classList.replace('fade-in', 'fade-out')
+      modalWrapCheckout.classList.replace('pop-up', 'pop-down')
     }
   }
 }

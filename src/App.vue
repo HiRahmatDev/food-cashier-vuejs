@@ -3,7 +3,8 @@
     <div v-if="$route.name !== 'Register' && $route.name !== 'Login' && $route.name !== 'User'">
       <Navbar @modal-clicked="showModal"
               @cart-clicked="showCart" />
-      <Sidebar @modal-clicked="showModal" />
+      <Sidebar @modal-clicked="showModal"
+               @modalflash-clicked="showFlash" />
       <Cart @cart-clicked="hideCart"
             @cancel-clicked="cancelOrder"
             @checkout-clicked="showModalCheckout" />
@@ -11,7 +12,9 @@
             @close-modal="hideModal"
             @submit="addItem" />
       <ModalCheckout @close-modal="hideModalCheckout" />
-      <ModalFlash :modalLogout="modalLogout" />
+      <ModalFlash :modalLogout="modalLogout"
+                  @close-clicked="hideFlash"
+                  @submit="logout" />
     </div>
     <router-view/>
   </div>
@@ -67,6 +70,13 @@ export default {
         this.$store.state.cartSum = 0
       }, 300)
     },
+    getUser () {
+      const proto = {
+        mutation: 'GET_USERLOGIN',
+        urlPath: 'user/' + JSON.parse(localStorage.token).id
+      }
+      this.$store.dispatch('getApi', proto)
+    },
     getItem () {
       const proto = {
         mutation: 'GET_ITEM',
@@ -94,7 +104,15 @@ export default {
       this.$store.dispatch('postApi', proto)
       this.hideModal()
       this.getItem()
+    },
+    logout () {
+      delete localStorage.token
+      this.$router.go()
     }
+  },
+  created () {
+    this.getItem()
+    this.getUser()
   }
 }
 </script>

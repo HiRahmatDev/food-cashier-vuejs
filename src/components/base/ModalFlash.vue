@@ -1,7 +1,7 @@
 <template>
-  <div class="modal">
-    <div class="bg-modal flash fade-in"></div>
-    <div class="modal-wrap flash pop-up">
+  <div class="modal flash off">
+    <div class="bg-modal"></div>
+    <div class="modal-wrap flash off">
       <div class="modal-head">
         <h2>{{ modalLogout.titleHeader }}</h2>
       </div>
@@ -9,7 +9,7 @@
         <p>{{ modalLogout.titleBody }}</p>
       </div>
       <div class="modal-btn">
-        <button @click="$emit('close-modal')" class="btn btn-secondary">{{ modalLogout.button.con }}</button>
+        <button @click="$emit('close-clicked')" class="btn btn-secondary">{{ modalLogout.button.con }}</button>
         <button @click="$emit('submit')" class="btn btn-primary">{{ modalLogout.button.pro }}</button>
       </div>
     </div>
@@ -77,6 +77,22 @@ export default {
   }
 }
 .modal {
+  &.off {
+    visibility: hidden;
+    opacity: 0;
+  }
+  &.fade-in {
+    animation-name: fade-in;
+    animation-fill-mode: forwards;
+    animation-duration: .2s;
+    animation-timing-function: ease-out;
+  }
+  &.fade-out {
+    animation-name: fade-out;
+    animation-fill-mode: forwards;
+    animation-duration: .2s;
+    animation-timing-function: ease-in;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,22 +103,6 @@ export default {
   width: 100vw;
   height: 100vh;
   .bg-modal {
-    &.off {
-      visibility: hidden;
-      opacity: 0;
-    }
-    &.fade-in {
-      animation-name: fade-in;
-      animation-fill-mode: forwards;
-      animation-duration: .2s;
-      animation-timing-function: ease-out;
-    }
-    &.fade-out {
-      animation-name: fade-out;
-      animation-fill-mode: forwards;
-      animation-duration: .2s;
-      animation-timing-function: ease-in;
-    }
     position: fixed;
     z-index: 3;
     top: 0;
@@ -137,10 +137,11 @@ export default {
     justify-content: flex-start;
     border-radius: 8px;
     background-color: white;
-    max-height: 95%;
-    height: 200px;
-    max-width: 95%;
-    width: 400px;
+    max-height: 90%;
+    height: auto;
+    max-width: 90%;
+    width: auto;
+    padding: 5px;
     overflow: hidden;
   }
   .modal-head {
@@ -156,6 +157,7 @@ export default {
   .modal-btn {
     margin-top: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
     .btn {
@@ -164,9 +166,7 @@ export default {
       padding: 8px;
       width: 100px;
       cursor: pointer;
-      &:first-child {
-        margin-right: 14px;
-      }
+      margin: 5px;
     }
   }
 }

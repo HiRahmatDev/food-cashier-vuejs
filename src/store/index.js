@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userLogin: [],
     foodMenu: [],
     foodCategory: [],
     selected: [],
@@ -27,14 +28,17 @@ export default new Vuex.Store({
     sumTotalPpn: (state, getters) => getters.sumTotal + getters.sumPpn
   },
   mutations: {
-    GET_ITEM (state, result) {
-      state.foodMenu = result
+    GET_USERLOGIN (state, data) {
+      state.userLogin = data
     },
-    ADD_ITEM (state, result) {
-      state.msgModal = result
+    GET_ITEM (state, data) {
+      state.foodMenu = data
     },
-    GET_CATEGORY (state, result) {
-      state.foodCategory = result
+    ADD_ITEM (state, data) {
+      state.msgModal = data
+    },
+    GET_CATEGORY (state, data) {
+      state.foodCategory = data
     },
     SELECT_MENU (state, id) {
       const data = state.foodMenu.filter(item => item.id === id)

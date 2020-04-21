@@ -7,6 +7,12 @@
           <h2>Menu</h2>
         </div>
       </a>
+      <a class="page user">
+        <div class="user">
+          <img src="@/assets/img/rahmat.jpg">
+          <h2>Rahmat Hidayatullah</h2>
+        </div>
+      </a>
       <router-link class="page" to="/">
         <div class="fork">
           <img src="@/assets/img/fork.png">
@@ -25,11 +31,18 @@
           <h2 class="green">Add Item</h2>
         </div>
       </a>
+      <a class="page logout">
+        <div @click="$emit('modalflash-clicked')" >
+          <img src="@/assets/img/logout.png">
+          <h2 class="red">Logout</h2>
+        </div>
+      </a>
     </div>
   </aside>
 </template>
 
 <script>
+
 export default {
 }
 </script>
@@ -44,17 +57,20 @@ export default {
   background-color: white;
   box-shadow: -4px 0 7px rgba(0, 0, 0, 0.733);
   padding: 0 10px;
-  transition: all .3s;
+  transition: width .3s;
   overflow: hidden;
+  z-index: 1;
   &:hover {
-    width: 170px;
-    overflow: hidden;
     z-index: 3;
+    width: 230px;
+    max-width: auto;
+    overflow: hidden;
     transition-delay: .4s;
   }
   div.sidebar-wrap {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
   a {
     margin: 10px 0;
@@ -63,6 +79,9 @@ export default {
     border: none;
     &.page {
       cursor: pointer;
+      &.logout {
+        margin-top: auto;
+      }
       &:hover {
         background-color: rgba(0, 0, 0, 0.048);
       }
@@ -72,6 +91,9 @@ export default {
       flex-wrap: nowrap;
       align-items: center;
       padding: 10px;
+      img {
+        height: 25px;
+      }
       &.burger {
         margin: 0px 3px;
         padding: 6.5px 10px;
@@ -79,8 +101,10 @@ export default {
           height: 20px;
         }
       }
-      img {
-        height: 25px;
+      &.user {
+        img {
+          border-radius: 50px;
+        }
       }
     }
     h2 {
@@ -88,8 +112,14 @@ export default {
       color: rgb(27, 27, 27);
       font-weight: bold;
       white-space: nowrap;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
       &.green {
         color: rgb(62, 161, 62);
+      }
+      &.red {
+        color: rgb(228, 66, 66);
       }
     }
   }
