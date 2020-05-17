@@ -58,21 +58,15 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
 
 ## Screenshots
 
-
-<div align="center">
-    <h4 align="center">LANDING PAGE</h4>
-    <img width="860" src="./screenshots/library-landing.gif">
-</div>
-<br>
 <div align="center">
     <h4 align="center">LOGIN & REGISTER PAGE</h4>
-    <img width="430" src="./screenshots/library-login.gif">
-    <img width="430" src="./screenshots/library-register.png">
+    <img width="430" src="./screenshots/food-cashier-login.gif">
+    <img width="430" src="./screenshots/food-cashier-register.png">
 </div>
 <div align="center">
-    <h4 align="center">DASHBOARD & BORROW PAGE</h4>
-    <img width="430" src="./screenshots/library-dashboard.gif">   
-    <img width="430" src="./screenshots/library-borrow-return.gif">
+    <h4 align="center">DASHBOARD & CHECKOUT PAGE</h4>
+    <img width="430" src="./screenshots/food-cashier-landing.gif">   
+    <img width="430" src="./screenshots/food-cashier-checkout.png">
 </div>
 <br>
 
