@@ -33,7 +33,6 @@
 ## Requirements
 
 - Node.js - Download and Install [Node.js](https://nodejs.org/en/).
-- Vue.js - Download and Install [Vue.js](https://vuejs.org/v2/guide/)
 
 ## Usage for development
 
