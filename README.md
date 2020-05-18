@@ -22,7 +22,6 @@
 - [Create Environment Variable](#create-environment-variable)
 - [Screenshots](#screenshots)
 - [Related Project](#related-project-backend)
-- [Contributors](#contributors)
 
 ## Features
 
@@ -74,17 +73,3 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
 
 * [`Backend-Food-Cashier`](https://github.com/HiRahmat-Dev/food-cashier-api)
 
-## Contributors
-
-<center>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/HiRahmat-Dev/">
-          <img width="150" src="https://avatars2.githubusercontent.com/u/55150659?s=460&u=c7171bb4128787c303efdce0d62bc86289f1211b&v=4" alt="Rahmat Hidayatullah"><br/>
-          <b>Rahmat Hidayatullah</b>
-        </a>
-      </td>
-    </tr>
-  </table>
-</center>
