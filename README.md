@@ -21,6 +21,7 @@
 - [Usage](#usage-for-development)
 - [Create Environment Variable](#create-environment-variable)
 - [Screenshots](#screenshots)
+- [Contributing](#contributing)
 - [Related Project](#related-project-backend)
 
 ## Features
@@ -68,6 +69,18 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
     <img width="430" src="./screenshots/food-cashier-checkout.png">
 </div>
 <br>
+
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Fork the Project
+1. Create your Feature Branch  ```git checkout -b [feature]```
+2. Commit your Changes ```git commit -m 'Add some feature'```
+3. Push to the Branch ```git push origin [feature]```
+4. Open a Pull Request
+
 
 ## Related Project (Backend)
 
