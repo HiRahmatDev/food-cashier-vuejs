@@ -21,8 +21,8 @@
 - [Usage](#usage-for-development)
 - [Create Environment Variable](#create-environment-variable)
 - [Screenshots](#screenshots)
+- [Contributing](#contributing)
 - [Related Project](#related-project-backend)
-- [Contributors](#contributors)
 
 ## Features
 
@@ -33,7 +33,6 @@
 ## Requirements
 
 - Node.js - Download and Install [Node.js](https://nodejs.org/en/).
-- Vue.js - Download and Install [Vue.js](https://vuejs.org/v2/guide/)
 
 ## Usage for development
 
@@ -58,39 +57,31 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
 
 ## Screenshots
 
-
-<div align="center">
-    <h4 align="center">LANDING PAGE</h4>
-    <img width="860" src="./screenshots/library-landing.gif">
-</div>
-<br>
 <div align="center">
     <h4 align="center">LOGIN & REGISTER PAGE</h4>
-    <img width="430" src="./screenshots/library-login.gif">
-    <img width="430" src="./screenshots/library-register.png">
+    <img width="430" src="./screenshots/food-cashier-login.gif">
+    <img width="430" src="./screenshots/food-cashier-register.png">
 </div>
 <div align="center">
-    <h4 align="center">DASHBOARD & BORROW PAGE</h4>
-    <img width="430" src="./screenshots/library-dashboard.gif">   
-    <img width="430" src="./screenshots/library-borrow-return.gif">
+    <h4 align="center">DASHBOARD & CHECKOUT PAGE</h4>
+    <img width="430" src="./screenshots/food-cashier-landing.gif">   
+    <img width="430" src="./screenshots/food-cashier-checkout.png">
 </div>
 <br>
+
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Fork the Project
+1. Create your Feature Branch  ```git checkout -b [feature]```
+2. Commit your Changes ```git commit -m 'Add some feature'```
+3. Push to the Branch ```git push origin [feature]```
+4. Open a Pull Request
+
 
 ## Related Project (Backend)
 
 * [`Backend-Food-Cashier`](https://github.com/HiRahmat-Dev/food-cashier-api)
 
-## Contributors
-
-<center>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/HiRahmat-Dev/">
-          <img width="150" src="https://avatars2.githubusercontent.com/u/55150659?s=460&u=c7171bb4128787c303efdce0d62bc86289f1211b&v=4" alt="Rahmat Hidayatullah"><br/>
-          <b>Rahmat Hidayatullah</b>
-        </a>
-      </td>
-    </tr>
-  </table>
-</center>
