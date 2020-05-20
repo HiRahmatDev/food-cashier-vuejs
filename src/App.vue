@@ -102,8 +102,14 @@ export default {
         dataItem
       }
       this.$store.dispatch('postApi', proto)
-      this.hideModal()
-      this.getItem()
+        .then(res => {
+          this.hideModal()
+          this.getItem()
+          this.modalAddItem.input.foodName = null
+          this.modalAddItem.input.category = null
+          this.modalAddItem.input.foodPrice = null
+          this.modalAddItem.input.imgUrl = null
+        })
     },
     logout () {
       delete localStorage.token

@@ -158,10 +158,16 @@ export default new Vuex.Store({
         })
     },
     postApi (context, proto) {
-      Axios.post(process.env.VUE_APP_URL_API + proto.urlPath, proto.dataItem)
-        .then(res => {
-          context.commit(proto.mutation, res.data)
-        })
+      return new Promise((resolve, reject) => {
+        Axios.post(process.env.VUE_APP_URL_API + proto.urlPath, proto.dataItem)
+          .then(res => {
+            context.commit(proto.mutation, res.data)
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
+      })
     }
   },
   modules: {
