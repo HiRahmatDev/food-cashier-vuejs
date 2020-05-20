@@ -64,7 +64,7 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
 </div>
 <div align="center">
     <h4 align="center">DASHBOARD & CHECKOUT PAGE</h4>
-    <img width="430" src="./screenshots/food-cashier-landing.gif">   
+    <img width="430" src="./screenshots/food-cashier-landing-new.gif">   
     <img width="430" src="./screenshots/food-cashier-checkout.png">
 </div>
 <br>
