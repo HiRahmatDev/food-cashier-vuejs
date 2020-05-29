@@ -117,8 +117,10 @@ export default {
     }
   },
   created () {
-    this.getItem()
-    this.getUser()
+    if (localStorage.token) {
+      this.getItem()
+      this.getUser()
+    }
   }
 }
 </script>
